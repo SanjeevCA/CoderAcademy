@@ -1,0 +1,29 @@
+@import "home";
+
+body{
+    background-color: coral;
+    padding-left: 60px;
+}
+
+h1 {
+    color: rgb(34, 34, 75);
+    font-family: "Poppins", sans-serif;
+    font-size: 55px;
+    margin-top: -15px;
+    margin-bottom: -25px;
+    &:hover{color:white;}
+}
+
+section {
+    background-color: orangered;
+    padding: 30px;
+}
+
+p{
+    font-family: "Poppins", sans-serif;
+    font-style: italic;
+    span{
+        color: goldenrod;
+        font-style: bold;
+    }
+}
