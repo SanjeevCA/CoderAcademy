@@ -17,12 +17,19 @@ def evenOrOdd(number)
     end
 end
 
+def divide(num1, num2)
+    return (num1/num2)
+end
+
+
 puts "-------------------------------------------------"
 puts
 
 tieShoeLace
 puts
 puts evenOrOdd(7)
+puts
+puts divide(221,12.0)
 
 puts
 puts "-------------------------------------------------"
