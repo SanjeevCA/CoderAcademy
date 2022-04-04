@@ -1,5 +1,7 @@
 class Team
 
+    require "colorize"
+
     def initialize (name, city, stadium, uniform, players, coach, staff)
         @name = name
         @city = city
@@ -18,18 +20,18 @@ class Team
     def team_info
 
         puts "======================================================"
-        puts "#{@city} #{@name}, #{@stadium}"
+        puts "#{@city} #{@name}, #{@stadium}".green.on_black
         puts "======================================================"
-        puts "Coach: #{@coach}  |  Uniform: #{@uniform}"
+        puts "Coach: #{@coach}  |  Uniform: #{@uniform}".red.on_black
         puts "------------------------------------------------------"
-        puts "Players: "
+        puts "Players: ".yellow.on_black
         puts
-        @players.each {|player| puts player}
+        @players.each {|player| puts "#{player}".yellow.on_black}
         puts
         puts "------------------------------------------------------"
-        puts "Staff: "
+        puts "Staff: ".red.on_black
         puts
-        @staff.each {|staff| puts staff}
+        @staff.each {|staff| puts "#{staff}".red.on_black}
         puts
         puts "======================================================"
     end
