@@ -15,5 +15,24 @@ class Team
         return "#{@city} #{@name}, #{@stadium}, #{@uniform}"
     end
 
+    def team_info
+
+        puts "======================================================"
+        puts "#{@city} #{@name}, #{@stadium}"
+        puts "======================================================"
+        puts "Coach: #{@coach}  |  Uniform: #{@uniform}"
+        puts "------------------------------------------------------"
+        puts "Players: "
+        puts
+        @players.each {|player| puts player}
+        puts
+        puts "------------------------------------------------------"
+        puts "Staff: "
+        puts
+        @staff.each {|staff| puts staff}
+        puts
+        puts "======================================================"
+    end
+
 end
 

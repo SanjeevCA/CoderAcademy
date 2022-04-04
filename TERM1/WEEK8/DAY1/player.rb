@@ -10,7 +10,7 @@ class Player < Team_Member
     end
 
     def to_s
-        return "#{@name} - #{@number} - #{@position}"
+        return "#{@number}  -  #{@name}  -  #{@position}"
     end
 
     def train
