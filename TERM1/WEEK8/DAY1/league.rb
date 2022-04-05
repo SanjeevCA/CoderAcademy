@@ -1,4 +1,4 @@
-class Leagues
+class League
    
     def initialize(name, sport, description, teams)
         @name = name
@@ -15,5 +15,19 @@ class Leagues
         @teams.each do |team|
             team
         end
+    end
+
+    def print_ladder
+
+        sorted_ladder = @teams.sort_by{|team| -team.wins}
+
+        puts
+        puts "TEAM \t\t | WINS | LOSSES"
+        sorted_ladder.each do |team|            
+            puts "------------------------------------------------------------"
+            team.team_table_view
+        end
+        puts
+        puts
     end
 end

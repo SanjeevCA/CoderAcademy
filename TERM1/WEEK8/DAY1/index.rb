@@ -1,62 +1,83 @@
 require "colorize"
-require "faker"
+require "tty-prompt"
+require_relative("./data.rb")
 
-require_relative "./team.rb"
-require_relative "./league.rb"
-require_relative "./team_member.rb"
-require_relative "./player.rb"
-require_relative "./coach.rb"
-require_relative "./staff.rb"
+# return of the method data is stored in league(variable)
+   $league = data
+   $prompt = TTY::Prompt.new
+ 
+   def select_option
+      answer = $prompt.select("What is your option?",["Ladder","Team's Info","Play game","Exit"])
+      answer
+   end
 
-tm1 = Team_Member.new("Payne Haas")
-player1 = Player.new("Darius Boyd", 1, "Full Back")
-coach1 = Coach.new(Faker::Sports::Basketball.coach)
-coach2 = Coach.new(Faker::Sports::Basketball.coach)
-coach3 = Coach.new(Faker::Sports::Basketball.coach)
-s1 = Staff.new("James Cook", "Physio")
+    # method to display the team's info when the option "Team's Info" is selected
+    def select_team
+        team = $prompt.select("Select your team",$league.print_teams)
+        return team
+    end
 
-team1_players = []
-team2_players = []
-team3_players = []
+    def play_game(home, away)
+        puts
+        puts "--------------------------------------------------"
+        puts "#{home} VS #{away}"
+        puts "--------------------------------------------------"
+        puts "played at: #{home.stadium}"
+        puts "--------------------------------------------------"
+        puts
+        print "Enter score for #{home}: "
+        score_home = gets.chomp.to_i
+        print "Enter score for #{away}: "
+        score_away = gets.chomp.to_i
+        puts
+        puts "--------------------------------------------------"
+        puts
+        if score_home > score_away
+            home.win
+            away.loss
+        else
+            home.loss
+            away.win
+        end
+        puts
+        puts "--------------------------------------------------"
+    end
 
-for i in 1..13
-    team1_players.push(Player.new(Faker::Name.name, i, Faker::Sports::Basketball.position))
-    team2_players.push(Player.new(Faker::Name.name, i, Faker::Sports::Basketball.position))
-    team3_players.push(Player.new(Faker::Name.name, i, Faker::Sports::Basketball.position))
-end
+    option =""
+    while option != "Exit"
 
-team1_staff = []
-team2_staff = []
-team3_staff = []
+    system "clear"
+    puts
+    puts "--------------------------------------------------"
+    puts "Welcome to the #{$league}"
+    puts "--------------------------------------------------"
+    puts
 
-for i in 1..3
-    team1_staff.push(Staff.new(Faker::Name.name, Faker::Job::position))
-    team2_staff.push(Staff.new(Faker::Name.name, Faker::Job::position))
-    team3_staff.push(Staff.new(Faker::Name.name, Faker::Job::position))
-end
+    option = select_option
+    case option 
+
+    when "Ladder"
+       
+        $league.print_ladder
+
+    when "Team's Info"
+        puts
+        team = select_team
+        puts team.team_info
+
+    when "Play game"
+        home = select_team
+        away = select_team
+
+        play_game(home, away)
+
+    else 
+        puts
+        puts " See you next time!"
+        next
+    end
 
 
-team1 = Team.new("Broncos", "Brisbane", "Lang Park", "Maroon & Orange", team1_players, coach1, team1_staff)
-team2 = Team.new("Cowboys", "North QLD", "QLD Country", "Navy & Yellow", team2_players, coach2, team2_staff)
-team3 = Team.new("Storm", "Melbourne", "AAMI Park", "Purple", team3_players, coach3, team3_staff)
-
-teams = [team1, team2, team3]
-
-league1 = Leagues.new("NRL", "Rugby League", "The premiere Rugby League tournament", teams)
-
-# puts "#{league1}".green.on_black
-# puts league1.print_teams
-# puts
-
-# team1_players.each do |player|
-#     player
-# end
-# puts s1
-# s1.train
-# s1.play
-
-puts
-
-team1.team_info
-
-puts
+    puts "Press enter to continue.."
+    gets 
+ end
